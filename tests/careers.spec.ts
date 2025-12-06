@@ -3,6 +3,7 @@ import { CareersPage } from '../pages/CareersPage';
 
 // add base test calss and extend current test from base test
 test('Checks if the job titles contains Quality', async ({ page }) => {
+  
   //instead of creating each page object manually in the base test, use page factory
   const careers = new CareersPage(page);
 

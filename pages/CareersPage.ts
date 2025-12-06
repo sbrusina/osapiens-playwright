@@ -8,6 +8,7 @@ export interface JobInfo {
 
 //page should extend base page calss for common methods like open, close, waitForLoad etc
 export class CareersPage {
+
   readonly page: Page;
 
   //selectors should be isolated as locators
@@ -18,7 +19,8 @@ export class CareersPage {
   constructor(page: Page) {
     this.page = page;
   }
-    async open(path = '/'): Promise<void> {
+
+  async open(path = '/'): Promise<void> {
     await this.page.goto(path);
     await this.page.waitForLoadState('networkidle');
   }
@@ -48,6 +50,12 @@ export class CareersPage {
 
   async hasKeywordInJobs(keyword: string): Promise<boolean> {
     const jobs = await this.getJobs();
+
+    if (!jobs || jobs.length === 0) {
+      console.warn("No jobs found on the page.");
+      return false;
+    }
+    
     let count = 0;
 
     for (const job of jobs) {
